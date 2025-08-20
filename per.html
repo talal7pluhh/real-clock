@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+    <h1>Rules Are Simple</h1>
+    <h3>If You Get Exactly The Number 58633 You Win</h3>
+    <button class="generate" onclick="game()">Generate A Random Number</button>
+    <p id="number">Your Number Is: </p>
+    <p>With Some Math You'll Find The Chances To Get The Number Are 1 in A MILLION !!!!!</p>
+</div>
+    <script>
+        let numberEl = document.getElementById("number");
+        function game() {
+            let randomNum = Math.floor(Math.random() * 100000);
+            numberEl.textContent = "Your Number Is: " + randomNum;
+            if (randomNum === 58633) {
+                numberEl.textContent = "You're A Goddamn Winner !!!"
+            }
+        }
+        let random = Math.ceil(Math.random(1, 7) * 7);
+        console.log(random);
+    </script>
+    <style>
+        body{
+            box-sizing: border-box;
+            font-family: monospace;
+            font-weight: bolder;
+            height: 100vh;
+            margin: auto;
+            color: white;
+            background-color: rgba(7, 7, 65, 0.908);
+        }
+
+        .generate{
+            text-align: center;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 16px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: bolder;
+            font-size: 18px;
+            width: 350px;
+            max-height: 100px;
+            background-color: goldenrod;
+            transition: all 0.2s ease-in-out;
+        }
+    h1{
+        font-size: 3rem;
+        text-align: center;
+    }
+    h3{
+        font-size: 2rem;
+        text-align: center;
+    }
+    p{
+        text-align: center;
+        font-size: 2rem;
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .generate:hover{
+        transform: scale(1.2);
+        background-color: white;
+        color: goldenrod;
+    }
+    
+    </style>
+</body>
+</html>
