@@ -3,32 +3,1153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Life Clock</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Professional CV Generator</title>
+    <meta name="description" content="CV Generator - Create and download professional CVs">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .CVGenerator {
+            text-align: center;
+            min-height: 100vh;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .CVGenerator-header {
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .CVGenerator-title {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .CVGenerator-intro {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .CVGenerator-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .form-section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .preview-section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .section-title {
+            color: #2575fc;
+            border-bottom: 2px solid #6a11cb;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: left;
+        }
+
+        .CVForm {
+            text-align: left;
+        }
+
+        .section-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .tab {
+            background: #f0f0f0;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #555;
+        }
+
+        .tab:hover {
+            background: #e0e0e0;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            color: #2575fc;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .experience-item, .education-item {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+        }
+
+        .skill-input-container {
+            position: relative;
+        }
+
+        .remove-skill-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-skill-btn:hover {
+            background: #ff1a1a;
+        }
+
+        .add-btn {
+            background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .remove-btn {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .remove-btn:hover {
+            background: #ff1a1a;
+        }
+
+        .languages-title {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #2575fc;
+        }
+
+        .CVPreview {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .cv-preview-container {
+            flex: 1;
+            overflow-y: auto;
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cv-document {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 100%;
+            margin: 0 auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: left;
+        }
+
+        .cv-header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #2575fc;
+            margin-bottom: 30px;
+        }
+
+        .cv-name {
+            color: #2575fc;
+            font-size: 2.5rem;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cv-contact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            font-size: 0.9rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 5px;
+        }
+
+        .contact-label {
+            font-weight: bold;
+            color: #6a11cb;
+        }
+
+        .contact-value {
+            color: #333;
+        }
+
+        .cv-section {
+            margin-bottom: 30px;
+        }
+
+        .section-heading {
+            color: #2575fc;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .summary-text {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .experience-item:last-child, .education-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .experience-header, .education-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+
+        .experience-position, .education-degree {
+            color: #333;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .experience-company, .education-institution {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: normal;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .experience-dates, .education-dates {
+            color: #2575fc;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .experience-description, .education-description {
+            line-height: 1.6;
+            color: #555;
+            margin: 0;
+        }
+
+        .skills-container, .languages-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag, .language-tag {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            white-space: nowrap;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 176, 155, 0.4);
+        }
+
+        .download-btn:active {
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 768px) {
+            .CVGenerator-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .form-section, .preview-section {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .cv-document {
+                padding: 20px;
+            }
+            
+            .cv-name {
+                font-size: 2rem;
+            }
+            
+            .cv-contact {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .preview-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .download-btn {
+                width: 100%;
+            }
+            
+            .CVGenerator-title {
+                font-size: 2rem;
+            }
+            
+            .CVGenerator-intro {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>CLOCK</h1>
-<div class="container">
-    <div>
-        <span id="hour">00</span>
-        <span id="text">Hours  </span>
+    <div class="CVGenerator">
+        <header class="CVGenerator-header">
+            <h1 class="CVGenerator-title">Professional CV Generator</h1>
+            <p class="CVGenerator-intro">Create a stunning CV in minutes and download as PDF</p>
+        </header>
+        
+        <div class="CVGenerator-container">
+            <div class="form-section">
+                <div class="CVForm">
+                    <h2 class="section-title">CV Information</h2>
+                    
+                    <div class="section-tabs">
+                        <button class="tab active" data-section="personal">Personal Info</button>
+                        <button class="tab" data-section="experience">Experience</button>
+                        <button class="tab" data-section="education">Education</button>
+                        <button class="tab" data-section="skills">Skills & Languages</button>
+                    </div>
+                    
+                    <!-- Personal Info Section -->
+                    <div class="form-section" id="personal-section">
+                        <h3>Personal Information</h3>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="john.doe@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (123) 456-7890">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" placeholder="City, Country">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn</label>
+                            <input type="text" id="linkedin" name="linkedin" placeholder="linkedin.com/in/username">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="github">GitHub</label>
+                            <input type="text" id="github" name="github" placeholder="github.com/username">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="summary">Professional Summary</label>
+                            <textarea id="summary" name="summary" placeholder="A brief summary of your professional background and career goals..." rows="4"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience Section -->
+                    <div class="form-section hidden" id="experience-section">
+                        <h3>Work Experience</h3>
+                        <div id="experience-container">
+                            <div class="experience-item">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="company-1">Company</label>
+                                        <input type="text" id="company-1" placeholder="Company Name">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="position-1">Position</label>
+                                        <input type="text" id="position-1" placeholder="Job Title">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="exp-start-1">Start Date</label>
+                                        <input type="month" id="exp-start-1">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="exp-end-1">End Date</label>
+                                        <input type="month" id="exp-end-1" placeholder="Present">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="exp-desc-1">Description</label>
+                                    <textarea id="exp-desc-1" placeholder="Describe your responsibilities and achievements..." rows="3"></textarea>
+                                </div>
+                                
+                                <button type="button" class="remove-btn" onclick="removeExperience(1)">Remove Experience</button>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="add-btn" onclick="addExperience()">Add Another Experience</button>
+                    </div>
+                    
+                    <!-- Education Section -->
+                    <div class="form-section hidden" id="education-section">
+                        <h3>Education</h3>
+                        <div id="education-container">
+                            <div class="education-item">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="institution-1">Institution</label>
+                                        <input type="text" id="institution-1" placeholder="University or School Name">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="degree-1">Degree</label>
+                                        <input type="text" id="degree-1" placeholder="Degree Title">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="edu-start-1">Start Date</label>
+                                        <input type="month" id="edu-start-1">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="edu-end-1">End Date</label>
+                                        <input type="month" id="edu-end-1" placeholder="Present">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="edu-desc-1">Description</label>
+                                    <textarea id="edu-desc-1" placeholder="Additional details about your education..." rows="2"></textarea>
+                                </div>
+                                
+                                <button type="button" class="remove-btn" onclick="removeEducation(1)">Remove Education</button>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="add-btn" onclick="addEducation()">Add Another Education</button>
+                    </div>
+                    
+                    <!-- Skills & Languages Section -->
+                    <div class="form-section hidden" id="skills-section">
+                        <h3>Skills</h3>
+                        <div id="skills-container">
+                            <div class="skill-item">
+                                <div class="form-group">
+                                    <label for="skill-1">Skill 1</label>
+                                    <div class="skill-input-container">
+                                        <input type="text" id="skill-1" placeholder="e.g. JavaScript, Project Management">
+                                        <button type="button" class="remove-skill-btn" onclick="removeSkill(1)">×</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="add-btn" onclick="addSkill()">Add Another Skill</button>
+                        
+                        <h3 class="languages-title">Languages</h3>
+                        <div id="languages-container">
+                            <div class="language-item">
+                                <div class="form-group">
+                                    <label for="language-1">Language 1</label>
+                                    <div class="skill-input-container">
+                                        <input type="text" id="language-1" placeholder="e.g. English, Spanish">
+                                        <button type="button" class="remove-skill-btn" onclick="removeLanguage(1)">×</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="add-btn" onclick="addLanguage()">Add Another Language</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="preview-section">
+                <div class="CVPreview">
+                    <div class="preview-header">
+                        <h2 class="section-title">CV Preview</h2>
+                        <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+                    </div>
+                    
+                    <div class="cv-preview-container">
+                        <div class="cv-document" id="cv-document">
+                            <!-- Personal Information Section -->
+                            <header class="cv-header">
+                                <h1 class="cv-name" id="cv-name">Your Name</h1>
+                                <div class="cv-contact" id="cv-contact">
+                                    <!-- Contact information will be populated here -->
+                                </div>
+                            </header>
+                            
+                            <!-- Professional Summary -->
+                            <section class="cv-section hidden" id="summary-section">
+                                <h2 class="section-heading">Professional Summary</h2>
+                                <p class="summary-text" id="cv-summary"></p>
+                            </section>
+                            
+                            <!-- Work Experience -->
+                            <section class="cv-section hidden" id="cv-experience-section">
+                                <h2 class="section-heading">Work Experience</h2>
+                                <div id="cv-experience"></div>
+                            </section>
+                            
+                            <!-- Education -->
+                            <section class="cv-section hidden" id="cv-education-section">
+                                <h2 class="section-heading">Education</h2>
+                                <div id="cv-education"></div>
+                            </section>
+                            
+                            <!-- Skills -->
+                            <section class="cv-section hidden" id="cv-skills-section">
+                                <h2 class="section-heading">Skills</h2>
+                                <div class="skills-container" id="cv-skills"></div>
+                            </section>
+                            
+                            <!-- Languages -->
+                            <section class="cv-section hidden" id="cv-languages-section">
+                                <h2 class="section-heading">Languages</h2>
+                                <div class="languages-container" id="cv-languages"></div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <span id="minute">00</span>
-        <span id="text">Minutes</span>
-    </div>
-    <div>
-        <span id="second">00</span>
-        <span id="text">Seconds</span>
-    </div>
-    <div>
-        <span id="ampm">AM</span>
-    </div>
-</div>
+    
+    <!-- Include jsPDF and html2canvas libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all form sections
+                document.querySelectorAll('.form-section[id$="-section"]').forEach(section => {
+                    section.classList.add('hidden');
+                });
+                
+                // Show the selected section
+                const sectionId = tab.getAttribute('data-section') + '-section';
+                document.getElementById(sectionId).classList.remove('hidden');
+            });
+        });
 
-    <script src="app.js"></script>
+        // Personal information handling
+        document.getElementById('name').addEventListener('input', updatePreview);
+        document.getElementById('email').addEventListener('input', updatePreview);
+        document.getElementById('phone').addEventListener('input', updatePreview);
+        document.getElementById('address').addEventListener('input', updatePreview);
+        document.getElementById('linkedin').addEventListener('input', updatePreview);
+        document.getElementById('github').addEventListener('input', updatePreview);
+        document.getElementById('summary').addEventListener('input', updatePreview);
+
+        // Experience counter for unique IDs
+        let experienceCounter = 1;
+        
+        // Add new experience
+        function addExperience() {
+            experienceCounter++;
+            const container = document.getElementById('experience-container');
+            const newExperience = document.createElement('div');
+            newExperience.className = 'experience-item';
+            newExperience.innerHTML = `
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="company-${experienceCounter}">Company</label>
+                        <input type="text" id="company-${experienceCounter}" placeholder="Company Name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="position-${experienceCounter}">Position</label>
+                        <input type="text" id="position-${experienceCounter}" placeholder="Job Title">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="exp-start-${experienceCounter}">Start Date</label>
+                        <input type="month" id="exp-start-${experienceCounter}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="exp-end-${experienceCounter}">End Date</label>
+                        <input type="month" id="exp-end-${experienceCounter}" placeholder="Present">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exp-desc-${experienceCounter}">Description</label>
+                    <textarea id="exp-desc-${experienceCounter}" placeholder="Describe your responsibilities and achievements..." rows="3"></textarea>
+                </div>
+                
+                <button type="button" class="remove-btn" onclick="removeExperience(${experienceCounter})">Remove Experience</button>
+            `;
+            container.appendChild(newExperience);
+            
+            // Add event listeners to new inputs
+            document.getElementById(`company-${experienceCounter}`).addEventListener('input', updatePreview);
+            document.getElementById(`position-${experienceCounter}`).addEventListener('input', updatePreview);
+            document.getElementById(`exp-start-${experienceCounter}`).addEventListener('input', updatePreview);
+            document.getElementById(`exp-end-${experienceCounter}`).addEventListener('input', updatePreview);
+            document.getElementById(`exp-desc-${experienceCounter}`).addEventListener('input', updatePreview);
+            
+            updatePreview();
+        }
+
+        // Remove experience
+        function removeExperience(id) {
+            if (document.querySelectorAll('.experience-item').length > 1) {
+                const element = document.querySelector(`.experience-item input[id="company-${id}"]`).closest('.experience-item');
+                element.remove();
+                updatePreview();
+            }
+        }
+
+        // Education counter for unique IDs
+        let educationCounter = 1;
+        
+        // Add new education
+        function addEducation() {
+            educationCounter++;
+            const container = document.getElementById('education-container');
+            const newEducation = document.createElement('div');
+            newEducation.className = 'education-item';
+            newEducation.innerHTML = `
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="institution-${educationCounter}">Institution</label>
+                        <input type="text" id="institution-${educationCounter}" placeholder="University or School Name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="degree-${educationCounter}">Degree</label>
+                        <input type="text" id="degree-${educationCounter}" placeholder="Degree Title">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edu-start-${educationCounter}">Start Date</label>
+                        <input type="month" id="edu-start-${educationCounter}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edu-end-${educationCounter}">End Date</label>
+                        <input type="month" id="edu-end-${educationCounter}" placeholder="Present">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edu-desc-${educationCounter}">Description</label>
+                    <textarea id="edu-desc-${educationCounter}" placeholder="Additional details about your education..." rows="2"></textarea>
+                </div>
+                
+                <button type="button" class="remove-btn" onclick="removeEducation(${educationCounter})">Remove Education</button>
+            `;
+            container.appendChild(newEducation);
+            
+            // Add event listeners to new inputs
+            document.getElementById(`institution-${educationCounter}`).addEventListener('input', updatePreview);
+            document.getElementById(`degree-${educationCounter}`).addEventListener('input', updatePreview);
+            document.getElementById(`edu-start-${educationCounter}`).addEventListener('input', updatePreview);
+            document.getElementById(`edu-end-${educationCounter}`).addEventListener('input', updatePreview);
+            document.getElementById(`edu-desc-${educationCounter}`).addEventListener('input', updatePreview);
+            
+            updatePreview();
+        }
+
+        // Remove education
+        function removeEducation(id) {
+            if (document.querySelectorAll('.education-item').length > 1) {
+                const element = document.querySelector(`.education-item input[id="institution-${id}"]`).closest('.education-item');
+                element.remove();
+                updatePreview();
+            }
+        }
+
+        // Skills counter for unique IDs
+        let skillsCounter = 1;
+        
+        // Add new skill
+        function addSkill() {
+            skillsCounter++;
+            const container = document.getElementById('skills-container');
+            const newSkill = document.createElement('div');
+            newSkill.className = 'skill-item';
+            newSkill.innerHTML = `
+                <div class="form-group">
+                    <label for="skill-${skillsCounter}">Skill ${skillsCounter}</label>
+                    <div class="skill-input-container">
+                        <input type="text" id="skill-${skillsCounter}" placeholder="e.g. JavaScript, Project Management">
+                        <button type="button" class="remove-skill-btn" onclick="removeSkill(${skillsCounter})">×</button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(newSkill);
+            
+            // Add event listener to new input
+            document.getElementById(`skill-${skillsCounter}`).addEventListener('input', updatePreview);
+            
+            updatePreview();
+        }
+
+        // Remove skill
+        function removeSkill(id) {
+            if (document.querySelectorAll('#skills-container .skill-item').length > 1) {
+                const element = document.getElementById(`skill-${id}`).closest('.skill-item');
+                element.remove();
+                updatePreview();
+            }
+        }
+
+        // Languages counter for unique IDs
+        let languagesCounter = 1;
+        
+        // Add new language
+        function addLanguage() {
+            languagesCounter++;
+            const container = document.getElementById('languages-container');
+            const newLanguage = document.createElement('div');
+            newLanguage.className = 'language-item';
+            newLanguage.innerHTML = `
+                <div class="form-group">
+                    <label for="language-${languagesCounter}">Language ${languagesCounter}</label>
+                    <div class="skill-input-container">
+                        <input type="text" id="language-${languagesCounter}" placeholder="e.g. English, Spanish">
+                        <button type="button" class="remove-skill-btn" onclick="removeLanguage(${languagesCounter})">×</button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(newLanguage);
+            
+            // Add event listener to new input
+            document.getElementById(`language-${languagesCounter}`).addEventListener('input', updatePreview);
+            
+            updatePreview();
+        }
+
+        // Remove language
+        function removeLanguage(id) {
+            if (document.querySelectorAll('#languages-container .language-item').length > 1) {
+                const element = document.getElementById(`language-${id}`).closest('.language-item');
+                element.remove();
+                updatePreview();
+            }
+        }
+
+        // Update preview in real-time
+        function updatePreview() {
+            // Update personal information
+            document.getElementById('cv-name').textContent = document.getElementById('name').value || 'Your Name';
+            
+            // Update contact information
+            const contactContainer = document.getElementById('cv-contact');
+            contactContainer.innerHTML = '';
+            
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const github = document.getElementById('github').value;
+            
+            if (email) {
+                const emailElement = document.createElement('div');
+                emailElement.className = 'contact-item';
+                emailElement.innerHTML = '<span class="contact-label">Email:</span> <span class="contact-value">' + email + '</span>';
+                contactContainer.appendChild(emailElement);
+            }
+            
+            if (phone) {
+                const phoneElement = document.createElement('div');
+                phoneElement.className = 'contact-item';
+                phoneElement.innerHTML = '<span class="contact-label">Phone:</span> <span class="contact-value">' + phone + '</span>';
+                contactContainer.appendChild(phoneElement);
+            }
+            
+            if (address) {
+                const addressElement = document.createElement('div');
+                addressElement.className = 'contact-item';
+                addressElement.innerHTML = '<span class="contact-label">Address:</span> <span class="contact-value">' + address + '</span>';
+                contactContainer.appendChild(addressElement);
+            }
+            
+            if (linkedin) {
+                const linkedinElement = document.createElement('div');
+                linkedinElement.className = 'contact-item';
+                linkedinElement.innerHTML = '<span class="contact-label">LinkedIn:</span> <span class="contact-value">' + linkedin + '</span>';
+                contactContainer.appendChild(linkedinElement);
+            }
+            
+            if (github) {
+                const githubElement = document.createElement('div');
+                githubElement.className = 'contact-item';
+                githubElement.innerHTML = '<span class="contact-label">GitHub:</span> <span class="contact-value">' + github + '</span>';
+                contactContainer.appendChild(githubElement);
+            }
+            
+            // Update professional summary
+            const summarySection = document.getElementById('summary-section');
+            const summaryText = document.getElementById('summary').value;
+            if (summaryText) {
+                document.getElementById('cv-summary').textContent = summaryText;
+                summarySection.classList.remove('hidden');
+            } else {
+                summarySection.classList.add('hidden');
+            }
+            
+            // Update work experience
+            const experienceSection = document.getElementById('cv-experience-section');
+            const experienceContainer = document.getElementById('cv-experience');
+            experienceContainer.innerHTML = '';
+            
+            let hasExperience = false;
+            document.querySelectorAll('.experience-item').forEach((item, index) => {
+                const company = item.querySelector('input[id^="company-"]').value;
+                const position = item.querySelector('input[id^="position-"]').value;
+                const startDate = item.querySelector('input[id^="exp-start-"]').value;
+                const endDate = item.querySelector('input[id^="exp-end-"]').value;
+                const description = item.querySelector('textarea[id^="exp-desc-"]').value;
+                
+                if (company || position) {
+                    hasExperience = true;
+                    const experienceElement = document.createElement('div');
+                    experienceElement.className = 'experience-item';
+                    experienceElement.innerHTML = `
+                        <div class="experience-header">
+                            ${position ? '<h3 class="experience-position">' + position + '</h3>' : ''}
+                            ${company ? '<h4 class="experience-company">' + company + '</h4>' : ''}
+                        </div>
+                        ${(startDate || endDate) ? '<div class="experience-dates">' + (startDate || '') + ' - ' + (endDate || 'Present') + '</div>' : ''}
+                        ${description ? '<p class="experience-description">' + description + '</p>' : ''}
+                    `;
+                    experienceContainer.appendChild(experienceElement);
+                }
+            });
+            
+            if (hasExperience) {
+                experienceSection.classList.remove('hidden');
+            } else {
+                experienceSection.classList.add('hidden');
+            }
+            
+            // Update education
+            const educationSection = document.getElementById('cv-education-section');
+            const educationContainer = document.getElementById('cv-education');
+            educationContainer.innerHTML = '';
+            
+            let hasEducation = false;
+            document.querySelectorAll('.education-item').forEach((item, index) => {
+                const institution = item.querySelector('input[id^="institution-"]').value;
+                const degree = item.querySelector('input[id^="degree-"]').value;
+                const startDate = item.querySelector('input[id^="edu-start-"]').value;
+                const endDate = item.querySelector('input[id^="edu-end-"]').value;
+                const description = item.querySelector('textarea[id^="edu-desc-"]').value;
+                
+                if (institution || degree) {
+                    hasEducation = true;
+                    const educationElement = document.createElement('div');
+                    educationElement.className = 'education-item';
+                    educationElement.innerHTML = `
+                        <div class="education-header">
+                            ${degree ? '<h3 class="education-degree">' + degree + '</h3>' : ''}
+                            ${institution ? '<h4 class="education-institution">' + institution + '</h4>' : ''}
+                        </div>
+                        ${(startDate || endDate) ? '<div class="education-dates">' + (startDate || '') + ' - ' + (endDate || 'Present') + '</div>' : ''}
+                        ${description ? '<p class="education-description">' + description + '</p>' : ''}
+                    `;
+                    educationContainer.appendChild(educationElement);
+                }
+            });
+            
+            if (hasEducation) {
+                educationSection.classList.remove('hidden');
+            } else {
+                educationSection.classList.add('hidden');
+            }
+            
+            // Update skills
+            const skillsSection = document.getElementById('cv-skills-section');
+            const skillsContainer = document.getElementById('cv-skills');
+            skillsContainer.innerHTML = '';
+            
+            let hasSkills = false;
+            document.querySelectorAll('#skills-container input[id^="skill-"]').forEach(input => {
+                if (input.value.trim() !== '') {
+                    hasSkills = true;
+                    const skillTag = document.createElement('span');
+                    skillTag.className = 'skill-tag';
+                    skillTag.textContent = input.value;
+                    skillsContainer.appendChild(skillTag);
+                }
+            });
+            
+            if (hasSkills) {
+                skillsSection.classList.remove('hidden');
+            } else {
+                skillsSection.classList.add('hidden');
+            }
+            
+            // Update languages
+            const languagesSection = document.getElementById('cv-languages-section');
+            const languagesContainer = document.getElementById('cv-languages');
+            languagesContainer.innerHTML = '';
+            
+            let hasLanguages = false;
+            document.querySelectorAll('#languages-container input[id^="language-"]').forEach(input => {
+                if (input.value.trim() !== '') {
+                    hasLanguages = true;
+                    const languageTag = document.createElement('span');
+                    languageTag.className = 'language-tag';
+                    languageTag.textContent = input.value;
+                    languagesContainer.appendChild(languageTag);
+                }
+            });
+            
+            if (hasLanguages) {
+                languagesSection.classList.remove('hidden');
+            } else {
+                languagesSection.classList.add('hidden');
+            }
+        }
+
+        // PDF Download functionality
+        async function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            
+            // Get the CV document element
+            const cvElement = document.getElementById('cv-document');
+            
+            // Create a clone for better PDF formatting
+            const clone = cvElement.cloneNode(true);
+            document.body.appendChild(clone);
+            
+            // Temporarily adjust styles for PDF
+            clone.style.width = '210mm';
+            clone.style.height = '297mm';
+            clone.style.padding = '20mm';
+            clone.style.boxShadow = 'none';
+            
+            try {
+                const canvas = await html2canvas(clone, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                });
+                
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgWidth = 210;
+                const pageHeight = 297;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+                
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                
+                }
+                
+                pdf.save('my-cv.pdf');
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('Failed to generate PDF. Please try again.');
+            } finally {
+                // Clean up the clone
+                document.body.removeChild(clone);
+            }
+        }
+
+        // Initialize the preview
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePreview();
+        });
+    </script>
 </body>
 </html>

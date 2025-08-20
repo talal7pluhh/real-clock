@@ -1,93 +1,113 @@
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url(pictures/morskie-oko-a-tatry.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-size: cover;
-    opacity: 0.7; /* Adjust this value for desired transparency */
-    z-index: -1;
-    pointer-events: none;
-}
 body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    background-image: linear-gradient(to right, #f89bb7, #62ddff, #ff3ccef2);
+    color: #001;
+}
+h1{
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 3px;
+    line-height: 1.5;
+}
+
+#count{
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 3em;
+    letter-spacing: 2.55px;
+    color: #001;
+}
+
+#increment{
+    padding: 20px;
+    background: rgb(93, 0, 93);
+    color: #eee;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 2rem;
+    font-weight: bolder;
+    letter-spacing: 2.55px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.35s ease-in-out;
+    width: 250px;
+}
+#increment:hover{
+    background: rgb(255, 0, 255);
+    color: #001;
+    transform: scale(1.1);
+}
+
+#save{
+    padding: 20px;
+    background: rgb(0, 48, 100);
+    color: #eee;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 2rem;
+    font-weight: bolder;
+    letter-spacing: 2.55px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 250px;
+    margin-top: 20px;
+}
+
+#save:hover{
+    background: rgb(0, 100, 255);
+    color: #001;
+    transform: scale(1.1);
+}
+
+#buttons{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 95vh;
 }
 
-.container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: rgb(0, 0, 0);
-    font-size: 16px;
-    font-weight: bold ;
-    font-family: "Montserrat" , sans-serif;
-    line-height: 1.80;
+#save:active, #increment:active{
+    transform: scale(0.9);
 }
-h1{
+
+#allCounts{
+    text-align: center;
+    letter-spacing: 2.5px;
     font-family: "Montserrat", sans-serif;
+    font-size: 2rem;
+    color: #004;
+    margin-top: 50px;
+}
+
+#reset{
+    padding: 20px;
+    background: rgb(1, 51, 0);
+    color: #eee;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 2rem;
     font-weight: bolder;
-    text-align: center;
-    letter-spacing: 5px;
-    font-size: 40px;
-}
-div#span{
-    letter-spacing: 4.5px;
-    font-weight: bold;
-    font-family: "Montserrat", sans-serif;
-}
-#ampm{
-    margin-left: 25px;
-    font-size: x-large;
-}
-#second, #text{
-    margin-left: 10px;
-}
-#minute, #text{
-    margin-left: 10px;
-}
-#hour, #text{
-    margin-left: 10px;
+    letter-spacing: 2.55px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 250px;
+    margin-top: 20px;
 }
 
-.container span{
-    width: 100px;
-    height: 80px;
-    background-color: rgb(194, 18, 194);
-    color: white;
-    opacity: .78;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 19.5px;
-    box-shadow: 2px 2px 2px rgba(0,0 ,0 , 0.35);
-    text-shadow: 2px 2px 4px rgba(0,0 ,0 , 0.35) ;
-}
-#text{
-    background-color: rgb(100, 1, 100);
-    opacity: 1;
-    letter-spacing: 2px;
+#reset:hover{
+    background: rgb(0, 255, 68);
+    color: #001;
+    transform: scale(1.1);
 }
 
-.container div{
-    box-shadow: 2px 2px 2px rgba(0,0 ,0 , 0.35);
-}
-#ampm{
-    font-size: 38px;
-    letter-spacing: 3px;
-}
-#second, #minute, #hour{
-    font-size: 40px;
-    letter-spacing: 2px;
+#reset:active{
+    transform: scale(0.9);
 }

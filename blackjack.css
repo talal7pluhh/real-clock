@@ -1,0 +1,112 @@
+*{
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url(img/9999520.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    color: goldenrod;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bolder;
+    font-size: 3rem;
+    letter-spacing: 2px;
+}
+
+#message-el {
+    text-align: center;
+    color: #ffffffdd;
+    font-size: 2rem;
+    font-weight: bolder;
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+}
+
+p {
+    text-align: center;
+    color: #ffffffdd;
+    font-size: 1.83rem;
+    font-family: 'Merriweather', sans-serif;
+    font-weight: bolder;
+    letter-spacing: 2.7px;
+}
+
+#start{
+    color: #016f32;
+    background-color: goldenrod ;
+    width: 200px;
+    max-width: 250px;
+    padding: 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.28s ease-in-out;
+    margin-bottom: 25px;
+}
+.startbtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#start:hover{
+    transform: scale(1.2);
+    color: goldenrod;
+    background-color: #016f32;
+}
+
+#newcard{
+    color: #016f32;
+    background-color: goldenrod ;
+    width: 200px;
+    max-width: 250px;
+    padding: 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.35s ease-in-out;
+}
+
+#newcard:hover{
+    transform: scale(1.2);
+    color: goldenrod;
+    background-color: #016f32;
+}
+
+svg{
+    width: 55px;
+    height: 55px;
+    fill: #ffffffdd;
+    margin: 25px 25px 25px 25px;
+    transition: all 0.35s ease-in-out;
+}
+#svgCon{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#games{
+    font-family: "Montserrat", sans-serif;
+    font-size: x-large;
+    font-weight: bolder;
+    margin-top: 300px;
+}
+
+svg:hover{
+    fill: aquamarine;
+    transform: scale(1.3);
+    filter:blur(1px);
+}
